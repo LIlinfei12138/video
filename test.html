@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="../../jquery/3/jquery-3.4.1.js"></script>
+		<style>
+			.check{
+				background-color:red;
+			}
+		</style>
+	</head>
+	<body>
+		<div>1</div>
+		<div>2</div>
+		<div>3</div>
+		<div>4</div>
+		<script>
+			$("div").each(function(index,item){
+				$(item).click(function(e){
+					$(item).addClass("check").siblings().removeClass("check");
+				});
+			});
+		</script>
+	</body>
+</html>
