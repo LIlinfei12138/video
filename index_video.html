@@ -140,7 +140,7 @@
 				text-overflow: ellipsis;
 			}
 
-			#wait {
+			.wait {
 				position: absolute;
 				top: 32%;
 				left: 50%;
@@ -286,7 +286,7 @@
 				videoData = d.data.videoList;
 				// // 移除img
 				// console.log(img);
-				// $(img).css("display", "none");
+				$(img).remove();
 				$(videoData).each(function(idx, item) {
 					$dataUl.append("<li vid=" + item.vid + " class='data-li'>" +
 						"<a href=" + item.mp4_url + " target='_blank' vid=" + item.vid + ">" +
@@ -357,8 +357,9 @@
 						_.get("//api.isoyu.com/api/Video/video_type", {
 							type: index,
 							page: 10
-						}, function(d, error) {
+						}, function(d, error,img) {
 							videoData = d.data;
+							$(img).remove();
 							$(videoData).each(function(idx, item) {
 								// 循环遍历插数据
 								$($typeData[index]).append("<li vid=" + item.vid + " class='data-li'>" +
@@ -398,6 +399,9 @@
 				});
 			});
 			// console.log($(".header-ul>li>a"));
+			// _.get("//api.isoyu.com/api/Weather/get_weather",{city:"广州市"},function(d){
+			// 	console.log(d);
+			// })
 		</script>
 	</body>
 </html>

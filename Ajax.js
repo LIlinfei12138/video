@@ -10,9 +10,15 @@ window._ = {
 		}
 
 		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 1){
+				var waitImg = document.createElement("img");
+				waitImg.className = "wait";
+				waitImg.src = "./img/wait.gif";
+				document.body.appendChild(waitImg);
+			}
 			if (xhr.readyState == 4) {
 				if (xhr.status >= 200 && xhr.status < 300 || xhr.status == 304) {
-					callback(JSON.parse(xhr.responseText), null, document.querySelector("#wait"));
+					callback(JSON.parse(xhr.responseText), null, document.querySelectorAll(".wait"));
 
 					// 通过回调函数获取li
 					if (gainEle) {
@@ -21,13 +27,10 @@ window._ = {
 				} else {
 					callback(null, new Error("请求错误"));
 				}
-			} else {
+			} else if (xhr.readyState == 3){
 				console.log("正在请求中");
 				// if (!waitImg) {
-				// 	var waitImg = document.createElement("img");
-				// 	waitImg.id = "wait";
-				// 	waitImg.src = "./img/wait.gif";
-				// 	document.body.appendChild(waitImg);
+
 				// }
 			}
 		}
@@ -154,3 +157,15 @@ window._ = {
 		return obj;
 	}
 }
+
+// function(d){
+// 	console.log(d);
+// }
+
+
+// callback(JSON.parse(xhr.responseText), null);
+
+
+// function(d){
+// 	console.log(d);
+// }(JSON.parse(xhr.responseText), null)
